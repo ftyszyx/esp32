@@ -8,7 +8,7 @@ set(PROJECT_VER "1.2.2")
 
 # Add this line to disable the specific warning
 add_compile_options(-Wno-missing-field-initializers)
-
+message(STATUS "IDF_PATH: ${IDF_PATH}")
 include($ENV{IDF_PATH}/tools/cmake/project.cmake)
 project(xiaozhi)
 

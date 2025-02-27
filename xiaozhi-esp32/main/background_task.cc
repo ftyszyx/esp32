@@ -46,6 +46,7 @@ void BackgroundTask::WaitForCompletion() {
     });
 }
 
+// wait have task to run
 void BackgroundTask::BackgroundTaskLoop() {
     ESP_LOGI(TAG, "background_task started");
     while (true) {
