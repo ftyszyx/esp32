@@ -9,6 +9,13 @@
                 "${workspaceFolder}\\xiaozhi-esp32\\main",
                 "."
             ],
+            "browse": {
+                "path": [
+                    "C:\\Espressif\\frameworks\\esp-idf-v5.4\\components\\soc\\esp32s3\\include",
+                    "C:\\Espressif\\frameworks\\esp-idf-v5.4\\components\\**\\include",
+                    "${workspaceFolder}\\xiaozhi-esp32\\main\\boards\\common\\**",
+                    "${workspaceFolder}\\xiaozhi-esp32\\main"
+                ] },
             "intelliSenseMode": "windows-msvc-x64",
             "compilerPath": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.43.34808\\bin\\Hostx64\\x64\\cl.exe",
             "cStandard": "c17",
