@@ -3,6 +3,7 @@
         {
             "name": "ESP-IDF",
             "includePath": [
+                "C:\\Espressif\\frameworks\\esp-idf-v5.4\\components\\soc\\esp32s3\\include",
                 "C:\\Espressif\\frameworks\\esp-idf-v5.4\\components\\**\\include",
                 "${workspaceFolder}\\xiaozhi-esp32\\main\\boards\\common\\**",
                 "${workspaceFolder}\\xiaozhi-esp32\\main",
