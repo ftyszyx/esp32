@@ -60,3 +60,15 @@ idf.py build flash monitor
 idf.py -p COM3 monitor
 idf.py -p PORT monitor
 ```
+
+## xiaozhi-esp32
+
+如果你已经拥有一个小智 AI 聊天机器人设备，可以登录 [xiaozhi.me](https://xiaozhi.me) 控制台进行配置。
+
+👉 [后台操作视频教程（旧版界面）](https://www.bilibili.com/video/BV1jUCUY2EKM/)
+
+## 技术原理与私有化部署
+
+👉 [一份详细的 WebSocket 通信协议文档](docs/websocket.md)
+
+在个人电脑上部署服务器，可以参考另一位作者同样以 MIT 许可证开源的项目 [xiaozhi-esp32-server](https://github.com/xinnan-tech/xiaozhi-esp32-server)
