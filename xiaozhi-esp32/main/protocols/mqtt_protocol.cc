@@ -32,6 +32,7 @@ void MqttProtocol::Start() {
 }
 
 bool MqttProtocol::StartMqttClient() {
+    ESP_LOGI(TAG, "Starting mqtt client");
     if (mqtt_ != nullptr) {
         ESP_LOGW(TAG, "Mqtt client already started");
         delete mqtt_;

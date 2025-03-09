@@ -131,11 +131,13 @@ void Es8311AudioCodec::CreateDuplexChannels(gpio_num_t mclk, gpio_num_t bclk, gp
 }
 
 void Es8311AudioCodec::SetOutputVolume(int volume) {
+    ESP_LOGI(TAG, "SetOutputVolume %d", volume);
     ESP_ERROR_CHECK(esp_codec_dev_set_out_vol(output_dev_, volume));
     AudioCodec::SetOutputVolume(volume);
 }
 
 void Es8311AudioCodec::EnableInput(bool enable) {
+    ESP_LOGI(TAG, "EnableInput %d", enable);
     if (enable == input_enabled_) {
         return;
     }
@@ -156,6 +158,7 @@ void Es8311AudioCodec::EnableInput(bool enable) {
 }
 
 void Es8311AudioCodec::EnableOutput(bool enable) {
+    ESP_LOGI(TAG, "EnableOutput %d", enable);
     if (enable == output_enabled_) {
         return;
     }

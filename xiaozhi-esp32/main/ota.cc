@@ -127,7 +127,10 @@ bool Ota::CheckVersion() {
     has_new_version_ = IsNewVersionAvailable(current_version_, firmware_version_);
     if (has_new_version_) {
         ESP_LOGI(TAG, "New version available: %s", firmware_version_.c_str());
-    } else {
+        // has_new_version_ = false;
+    }
+    else
+    {
         ESP_LOGI(TAG, "Current is the latest version");
     }
     return true;

@@ -24,6 +24,7 @@ std::string Ml307Board::GetBoardType() {
 }
 
 void Ml307Board::StartNetwork() {
+    ESP_LOGI(TAG, "Starting network");
     auto display = Board::GetInstance().GetDisplay();
     display->SetStatus(Lang::Strings::DETECTING_MODULE);
     modem_.SetDebug(false);
@@ -65,6 +66,7 @@ void Ml307Board::WaitForNetworkReady() {
 
     // Close all previous connections
     modem_.ResetConnections();
+    ESP_LOGI(TAG, "Network ready");
 }
 
 Http* Ml307Board::CreateHttp() {

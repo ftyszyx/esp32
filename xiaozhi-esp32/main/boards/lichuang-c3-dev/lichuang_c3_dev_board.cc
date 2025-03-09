@@ -11,6 +11,7 @@
 #include <esp_lcd_panel_vendor.h>
 #include <driver/i2c_master.h>
 #include <driver/spi_common.h>
+#include "esp_efuse_table.h"
 #include <wifi_station.h>
 
 #define TAG "LichuangC3DevBoard"
@@ -66,7 +67,7 @@ private:
         esp_lcd_panel_io_handle_t panel_io = nullptr;
         esp_lcd_panel_handle_t panel = nullptr;
         // 液晶屏控制IO初始化
-        ESP_LOGD(TAG, "Install panel IO");
+        ESP_LOGI(TAG, "Install panel IO");
         esp_lcd_panel_io_spi_config_t io_config = {};
         io_config.cs_gpio_num = DISPLAY_SPI_CS_PIN;
         io_config.dc_gpio_num = DISPLAY_DC_PIN;
@@ -78,7 +79,7 @@ private:
         ESP_ERROR_CHECK(esp_lcd_new_panel_io_spi(SPI2_HOST, &io_config, &panel_io));
 
         // 初始化液晶屏驱动芯片ST7789
-        ESP_LOGD(TAG, "Install LCD driver");
+        ESP_LOGI(TAG, "Install LCD driver");
         esp_lcd_panel_dev_config_t panel_config = {};
         panel_config.reset_gpio_num = GPIO_NUM_NC;
         panel_config.rgb_ele_order = LCD_RGB_ELEMENT_ORDER_RGB;
@@ -109,14 +110,22 @@ private:
 
 public:
     LichuangC3DevBoard() : boot_button_(BOOT_BUTTON_GPIO) {
+        esp_efuse_write_field_bit(ESP_EFUSE_VDD_SPI_AS_GPIO);//io口11要改成io口
+        ESP_LOGI(TAG, "LichuangC3DevBoard constructor");
         InitializeI2c();
+        ESP_LOGI(TAG, "LichuangC3DevBoard InitializeI2c ok");
         InitializeSpi();
+        ESP_LOGI(TAG, "LichuangC3DevBoard InitializeSpi ok");
         InitializeSt7789Display();
+        ESP_LOGI(TAG, "LichuangC3DevBoard InitializeSt7789Display ok");
         InitializeButtons();
+        ESP_LOGI(TAG, "LichuangC3DevBoard InitializeButtons ok");
         InitializeIot();
+        ESP_LOGI(TAG, "LichuangC3DevBoard InitializeIot ok");
     }
 
     virtual AudioCodec* GetAudioCodec() override {
+        // ESP_LOGI(TAG, "get lichuang c3 dev board audio codec");
         static Es8311AudioCodec audio_codec(
             codec_i2c_bus_, 
             I2C_NUM_0, 
@@ -133,6 +142,7 @@ public:
     }
 
     virtual Display* GetDisplay() override {
+        ESP_LOGI(TAG, "get lichuang c3 dev board display");
         return display_;
     }
 };

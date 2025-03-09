@@ -12,6 +12,7 @@
 #define TAG "Board"
 
 Board::Board() {
+    ESP_LOGI(TAG, "Board constructor");
     Settings settings("board", true);
     uuid_ = settings.GetString("uuid");
     if (uuid_.empty()) {

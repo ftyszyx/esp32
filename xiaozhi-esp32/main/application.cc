@@ -46,6 +46,7 @@ Application::~Application() {
 }
 
 void Application::CheckNewVersion() {
+    ESP_LOGI(TAG, "Checking new version");
     auto& board = Board::GetInstance();
     auto display = board.GetDisplay();
     // Check if there is a new firmware version available
@@ -285,6 +286,7 @@ void Application::StopListening() {
 }
 
 void Application::Start() {
+    ESP_LOGI(TAG, "Starting application");
     auto& board = Board::GetInstance();
     SetDeviceState(kDeviceStateStarting);
 
@@ -328,16 +330,20 @@ void Application::Start() {
         app->MainLoop();
         vTaskDelete(NULL);
     }, "main_loop", 4096 * 2, this, 2, nullptr);
+    ESP_LOGI(TAG, "main_loop task created");
 
     /* Wait for the network to be ready */
     board.StartNetwork();
-
+    ESP_LOGI(TAG, "network ready");
     // Initialize the protocol
     display->SetStatus(Lang::Strings::LOADING_PROTOCOL);
+    ESP_LOGI(TAG, "loading protocol");
 #ifdef CONFIG_CONNECTION_TYPE_WEBSOCKET
     protocol_ = std::make_unique<WebsocketProtocol>();
+    ESP_LOGI(TAG, "websocket protocol created");
 #else
     protocol_ = std::make_unique<MqttProtocol>();
+    ESP_LOGI(TAG, "mqtt protocol created");
 #endif
     protocol_->OnNetworkError([this](const std::string& message) {
         Alert(Lang::Strings::ERROR, message.c_str(), "sad");
@@ -427,6 +433,7 @@ void Application::Start() {
             }
         }
     });
+    ESP_LOGI(TAG, "protocol start");
     protocol_->Start();
 
     // Check for new firmware version or get the MQTT broker address
@@ -435,6 +442,7 @@ void Application::Start() {
     ota_.SetHeader("Client-Id", board.GetUuid());
     ota_.SetHeader("X-Language", Lang::CODE);
 
+    ESP_LOGI(TAG, "check version task");
     xTaskCreate([](void* arg) {
         Application* app = (Application*)arg;
         app->CheckNewVersion();
